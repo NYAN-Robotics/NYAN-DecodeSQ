@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Outtake;
 /**
  * Example teleop code for a basic mecanum drive
  */
-@Autonomous(name = "Forward Auto")
+@Autonomous(name = "TESTING Auto")
 public class ForwardAuto extends LinearOpMode {
 
     // Create new Instance of the robot
