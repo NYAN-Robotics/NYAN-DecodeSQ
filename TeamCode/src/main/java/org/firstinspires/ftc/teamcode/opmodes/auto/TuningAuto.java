@@ -3,26 +3,19 @@ package org.firstinspires.ftc.teamcode.opmodes.auto;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.utilities.math.linearalgebra.Pose;
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
-import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.OneTimeCommand;
-import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.ParallelCommandGroup;
 import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.SequentialCommandGroup;
-import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.YieldCommand;
 import org.firstinspires.ftc.teamcode.utilities.robot.command.movement.MovementCommand;
 import org.firstinspires.ftc.teamcode.utilities.robot.movement.MovementConstants;
-import org.firstinspires.ftc.teamcode.utilities.robot.movement.PIDDrive;
-import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Outtake;
 
 /**
  * Example teleop code for a basic mecanum drive
  */
-@Autonomous(name = "TESTING Auto")
-public class ForwardAuto extends LinearOpMode {
+@Autonomous(name = "Tuning Auto")
+public class TuningAuto extends LinearOpMode {
 
     // Create new Instance of the robot
     RobotEx robot = RobotEx.getInstance();
