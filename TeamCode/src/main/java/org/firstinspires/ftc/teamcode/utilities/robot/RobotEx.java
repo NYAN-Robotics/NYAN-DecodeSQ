@@ -70,11 +70,11 @@ public class RobotEx {
 
     private final Subsystem[] theSubsystems = new Subsystem[]{
             theDrivetrain,
-            theLocalizer//,
-//            theOuttake,
-//            theIntake,
+            theLocalizer,
+            theOuttake,
+            theIntake,
 //            theLimelight,
-//            theTurret
+            theTurret
     };
 
     public Telemetry theTelemetry;

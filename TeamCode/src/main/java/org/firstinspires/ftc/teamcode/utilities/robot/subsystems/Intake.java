@@ -46,8 +46,8 @@ public class Intake implements Subsystem {
     }
 
     public void intakeReverse() {
-        rightIntakeMotor.setPower(-1.0);
-        leftIntakeMotor.setPower(-1.0);
+        rightIntakeMotor.setPower(-0.5);
+        leftIntakeMotor.setPower(-0.5);
     }
 
     public void stopIntake() {

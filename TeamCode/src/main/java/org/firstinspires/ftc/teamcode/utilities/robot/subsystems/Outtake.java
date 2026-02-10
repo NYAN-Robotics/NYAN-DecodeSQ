@@ -64,8 +64,8 @@ public class Outtake implements Subsystem {
             rightTransferServo.setPosition(0.2);
         }
         while (transferTime.milliseconds() < 390) {
-            leftTransferServo.setPosition(0.5);
-            rightTransferServo.setPosition(0.5);
+            leftTransferServo.setPosition(0.53);
+            rightTransferServo.setPosition(0.53);
         }
         while (transferTime.milliseconds() < 2000) {
             rightIntakeMotor.setPower(1.0);
@@ -307,8 +307,8 @@ public class Outtake implements Subsystem {
         rightOuttakeMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftOuttakeMotor.setDirection(DcMotorEx.Direction.REVERSE);
 
-        rightOuttakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftOuttakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightOuttakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftOuttakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 //        clawServo.setDirection(Servo.Direction.REVERSE);
 //        this.telemetry = telemetry;

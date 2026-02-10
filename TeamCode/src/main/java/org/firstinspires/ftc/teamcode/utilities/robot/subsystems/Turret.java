@@ -35,22 +35,21 @@ public class Turret implements Subsystem {
                 tx = result.getTx();
                 telemetry.addData("tx", tx);
             } else {
-                tx = 0.0;
                 telemetry.addData("The thingy doesn't see the right tag", "fix it.");
             }
         } else {
-            tx = 0.0;
             telemetry.addData("The thingy is broken", "because of the limelight");
+            tx = 0.0;
         }
         double ltpos = leftTurretServo.getPosition();
         double rtpos = rightTurretServo.getPosition();
         telemetry.addData("ltpos", ltpos);
         telemetry.addData("rtpos", rtpos);
         telemetry.update();
-        if (tx <= -2) {
+        if (tx <= -5) {
             leftTurretServo.setPosition(ltpos + 0.001);
             rightTurretServo.setPosition(rtpos + 0.001);
-        } else if (tx >= 2) {
+        } else if (tx >= 5) {
             leftTurretServo.setPosition(ltpos - 0.001);
             rightTurretServo.setPosition(rtpos - 0.001);
         }
@@ -66,8 +65,8 @@ public class Turret implements Subsystem {
         leftTurretServo = hardwareMap.get(Servo.class, "leftTurretServo");
         rightTurretServo = hardwareMap.get(Servo.class, "rightTurretServo");
 
-        leftTurretServo.setDirection(Servo.Direction.REVERSE);
-        rightTurretServo.setDirection(Servo.Direction.REVERSE);
+        leftTurretServo.setDirection(Servo.Direction.FORWARD);
+        rightTurretServo.setDirection(Servo.Direction.FORWARD);
     }
 
     @Override

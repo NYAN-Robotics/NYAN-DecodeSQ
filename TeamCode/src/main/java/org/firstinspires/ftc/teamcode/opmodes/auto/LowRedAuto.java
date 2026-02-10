@@ -307,7 +307,7 @@ public class LowRedAuto extends LinearOpMode {
                 leftBackMotor.setPower(0);
                 rightFrontMotor.setPower(0);
                 rightBackMotor.setPower(0);
-                robot.theOuttake.outtake();
+                robot.theOuttake.outtake(0.8);
 //                rightOuttakeMotor.setPower(1.0);
 //                leftOuttakeMotor.setPower(1.0);
             } else if (runtime.milliseconds() < 18000) {

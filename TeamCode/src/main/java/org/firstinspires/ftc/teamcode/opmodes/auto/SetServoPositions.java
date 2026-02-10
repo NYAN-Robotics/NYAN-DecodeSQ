@@ -157,8 +157,8 @@ public class SetServoPositions extends LinearOpMode {
         rightLiftServo = hardwareMap.get(Servo.class, "rightLiftServo");
         leftLiftServo = hardwareMap.get(Servo.class, "leftLiftServo");
 
-        leftTurretServo.setDirection(Servo.Direction.REVERSE);
-        rightTurretServo.setDirection(Servo.Direction.REVERSE);
+        leftTurretServo.setDirection(Servo.Direction.FORWARD);
+        rightTurretServo.setDirection(Servo.Direction.FORWARD);
         rightPivotServo.setDirection(Servo.Direction.FORWARD);
         leftPivotServo.setDirection(Servo.Direction.REVERSE);
         rightTransferServo.setDirection(Servo.Direction.FORWARD);
@@ -211,8 +211,8 @@ public class SetServoPositions extends LinearOpMode {
             leftTransferServo.setPosition(0.5);
             rightTurretServo.setPosition(0);
             leftTurretServo.setPosition(0);
-            rightLiftServo.setPosition(0.5);
-            leftLiftServo.setPosition(0.5);
+            rightLiftServo.setPosition(0);
+            leftLiftServo.setPosition(0);
 //            int id = 0;
 //            double tx = 0;
 //            double ty = 0;

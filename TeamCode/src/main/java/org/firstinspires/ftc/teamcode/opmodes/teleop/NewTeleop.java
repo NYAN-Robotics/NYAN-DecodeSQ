@@ -111,8 +111,11 @@ public class NewTeleop extends LinearOpMode {
                 currentAlliance = Alliance.RED;
             }
 
-            leftTurretServo.setPosition(0.5);
-            rightTurretServo.setPosition(0.5);
+            rightPivotServo.setPosition(0.6);
+            leftPivotServo.setPosition(0.6);
+
+            leftTurretServo.setPosition(0.7);
+            rightTurretServo.setPosition(0.7);
         }
 
         runtime.reset();
@@ -152,8 +155,8 @@ public class NewTeleop extends LinearOpMode {
 
             robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
 
-            leftTransferServo.setPosition(0.5);
-            rightTransferServo.setPosition(0.5);
+            leftTransferServo.setPosition(0.53);
+            rightTransferServo.setPosition(0.53);
 
             if (gamepad1.dpad_up && turretModeTime.milliseconds() > 500) {
                 turretModeTime.reset();
@@ -164,19 +167,17 @@ public class NewTeleop extends LinearOpMode {
                 }
             }
             if (highTurret) {
-                outtakePower = 0.6;
+                outtakePower = 0.8;
             } else {
                 outtakePower = 0.8;
             }
-            rightPivotServo.setPosition(0.5);
-            leftPivotServo.setPosition(0.5);
-//            if (highTurret) {
-//                rightPivotServo.setPosition(0.25);
-//                leftPivotServo.setPosition(0.25);
-//            } else {
-//                rightPivotServo.setPosition(0.5);
-//                leftPivotServo.setPosition(0.5);
-//            }
+            if (highTurret) {
+                rightPivotServo.setPosition(0.9);
+                leftPivotServo.setPosition(0.9);
+            } else {
+                rightPivotServo.setPosition(0.6);
+                leftPivotServo.setPosition(0.6);
+            }
             if (gamepad1.right_trigger >= 0.1) {
                 robot.theIntake.intakeForward();
             } else if (gamepad1.right_bumper) {
