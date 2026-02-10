@@ -34,9 +34,9 @@ public class Outtake implements Subsystem {
     private Servo rightTransferServo = null;
     private Servo leftTransferServo = null;
 
-    public void outtake() {
-        leftOuttakeMotor.setPower(1.0);
-        rightOuttakeMotor.setPower(1.0);
+    public void outtake(double power) {
+        leftOuttakeMotor.setPower(power);
+        rightOuttakeMotor.setPower(power);
     }
     public void stopOuttake() {
         leftOuttakeMotor.setPower(0.0);
@@ -58,16 +58,14 @@ public class Outtake implements Subsystem {
 
         transferTime.reset();
         while (transferTime.milliseconds() < 200) {
-            leftTransferServo.setPosition(0.10);
-            rightTransferServo.setPosition(0.10);
+            rightIntakeMotor.setPower(1.0);
+            leftIntakeMotor.setPower(1.0);
+            leftTransferServo.setPosition(0.2);
+            rightTransferServo.setPosition(0.2);
         }
         while (transferTime.milliseconds() < 390) {
-            leftTransferServo.setPosition(0.52);
-            rightTransferServo.setPosition(0.52);
-        }
-        while (transferTime.milliseconds() < 600) {
-            rightIntakeMotor.setPower(0.0);
-            leftIntakeMotor.setPower(0.0);
+            leftTransferServo.setPosition(0.5);
+            rightTransferServo.setPosition(0.5);
         }
         while (transferTime.milliseconds() < 2000) {
             rightIntakeMotor.setPower(1.0);
@@ -308,6 +306,9 @@ public class Outtake implements Subsystem {
         leftIntakeMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightOuttakeMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftOuttakeMotor.setDirection(DcMotorEx.Direction.REVERSE);
+
+        rightOuttakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftOuttakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 //        clawServo.setDirection(Servo.Direction.REVERSE);
 //        this.telemetry = telemetry;

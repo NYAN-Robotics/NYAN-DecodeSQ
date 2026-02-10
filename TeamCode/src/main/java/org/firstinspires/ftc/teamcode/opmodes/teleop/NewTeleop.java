@@ -69,19 +69,19 @@ public class NewTeleop extends LinearOpMode {
         rightFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-//        leftTurretServo = hardwareMap.get(Servo.class, "leftTurretServo");
-//        rightTurretServo = hardwareMap.get(Servo.class, "rightTurretServo");
-//        rightPivotServo = hardwareMap.get(Servo.class, "rightPivotServo");
-//        leftPivotServo = hardwareMap.get(Servo.class, "leftPivotServo");
-//        rightTransferServo = hardwareMap.get(Servo.class, "rightTransferServo");
-//        leftTransferServo = hardwareMap.get(Servo.class, "leftTransferServo");
-//
-//        leftTurretServo.setDirection(Servo.Direction.REVERSE);
-//        rightTurretServo.setDirection(Servo.Direction.REVERSE);
-//        rightPivotServo.setDirection(Servo.Direction.FORWARD);
-//        leftPivotServo.setDirection(Servo.Direction.REVERSE);
-//        rightTransferServo.setDirection(Servo.Direction.FORWARD);
-//        leftTransferServo.setDirection(Servo.Direction.REVERSE);
+        leftTurretServo = hardwareMap.get(Servo.class, "leftTurretServo");
+        rightTurretServo = hardwareMap.get(Servo.class, "rightTurretServo");
+        rightPivotServo = hardwareMap.get(Servo.class, "rightPivotServo");
+        leftPivotServo = hardwareMap.get(Servo.class, "leftPivotServo");
+        rightTransferServo = hardwareMap.get(Servo.class, "rightTransferServo");
+        leftTransferServo = hardwareMap.get(Servo.class, "leftTransferServo");
+
+        leftTurretServo.setDirection(Servo.Direction.REVERSE);
+        rightTurretServo.setDirection(Servo.Direction.REVERSE);
+        rightPivotServo.setDirection(Servo.Direction.FORWARD);
+        leftPivotServo.setDirection(Servo.Direction.REVERSE);
+        rightTransferServo.setDirection(Servo.Direction.FORWARD);
+        leftTransferServo.setDirection(Servo.Direction.REVERSE);
 
         rightIntakeMotor = hardwareMap.get(DcMotorEx.class, "rightIntakeMotor");
         leftIntakeMotor = hardwareMap.get(DcMotorEx.class, "leftIntakeMotor");
@@ -111,8 +111,8 @@ public class NewTeleop extends LinearOpMode {
                 currentAlliance = Alliance.RED;
             }
 
-//            leftTurretServo.setPosition(0.5);
-//            rightTurretServo.setPosition(0.5);
+            leftTurretServo.setPosition(0.5);
+            rightTurretServo.setPosition(0.5);
         }
 
         runtime.reset();
@@ -123,6 +123,7 @@ public class NewTeleop extends LinearOpMode {
             double tx = 0;
             double ty = 0;
             double max;
+            double outtakePower;
 
             double axial = gamepad1.left_stick_y; // y is inverted to reverse the robot
             double yaw = -gamepad1.left_stick_x;
@@ -149,46 +150,26 @@ public class NewTeleop extends LinearOpMode {
             leftBackMotor.setPower(leftBackPower);
             leftFrontMotor.setPower(leftFrontPower);
 
-//            robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
+            robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
 
-//            LLResult result = limelight.getLatestResult();
-//            if (result != null && result.isValid()) {
-//                List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
-//                for (LLResultTypes.FiducialResult fiducial : fiducials) {
-//                    id = fiducial.getFiducialId();
-//                }
-//                if ((id == 20 && currentAlliance == Alliance.BLUE) || (id == 24 && currentAlliance == Alliance.RED)) {
-//                    tx = result.getTx();
-//                    ty = result.getTy();
-//                    telemetry.addData("tx", tx);
-//                    telemetry.addData("ty", ty);
-//                }
-//            } else {
-//                telemetry.addData("The thingy is broken", "because of the limelight");
-//            }
-//            double ltpos = leftTurretServo.getPosition();
-//            double rtpos = rightTurretServo.getPosition();
-//            telemetry.addData("ltpos", ltpos);
-//            telemetry.addData("rtpos", rtpos);
-//            telemetry.update();
-//            if (tx <= -2) {
-//                leftTurretServo.setPosition(ltpos + 0.001);
-//                rightTurretServo.setPosition(rtpos + 0.001);
-//            } else if (tx >= 2) {
-//                leftTurretServo.setPosition(ltpos - 0.001);
-//                rightTurretServo.setPosition(rtpos - 0.001);
-//            }
+            leftTransferServo.setPosition(0.5);
+            rightTransferServo.setPosition(0.5);
 
-//            leftTransferServo.setPosition(0.52);
-//            rightTransferServo.setPosition(0.52);
-//            if (gamepad1.dpad_up && turretModeTime.milliseconds() > 500) {
-//                turretModeTime.reset();
-//                if (!highTurret) {
-//                    highTurret = true;
-//                } else {
-//                    highTurret = false;
-//                }
-//            }
+            if (gamepad1.dpad_up && turretModeTime.milliseconds() > 500) {
+                turretModeTime.reset();
+                if (!highTurret) {
+                    highTurret = true;
+                } else {
+                    highTurret = false;
+                }
+            }
+            if (highTurret) {
+                outtakePower = 0.6;
+            } else {
+                outtakePower = 0.8;
+            }
+            rightPivotServo.setPosition(0.5);
+            leftPivotServo.setPosition(0.5);
 //            if (highTurret) {
 //                rightPivotServo.setPosition(0.25);
 //                leftPivotServo.setPosition(0.25);
@@ -196,67 +177,22 @@ public class NewTeleop extends LinearOpMode {
 //                rightPivotServo.setPosition(0.5);
 //                leftPivotServo.setPosition(0.5);
 //            }
-//            if (gamepad1.circle) {
-//                leftFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
-//                leftBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//                rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//                rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
-//            } else if (gamepad1.x) {
-//                leftFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//                leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
-//                rightFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
-//                rightBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//            }
-//            if (gamepad1.right_trigger >= 0.1) {
-//                robot.theIntake.intakeForward();
-////                rightIntakeMotor.setPower(1.0);
-////                leftIntakeMotor.setPower(1.0);
-//            } else if (gamepad1.right_bumper) {
-//                robot.theIntake.intakeReverse();
-////                rightIntakeMotor.setPower(-1.0);
-////                leftIntakeMotor.setPower(-1.0);
-//            } else {
-//                robot.theIntake.stopIntake();
-////                rightIntakeMotor.setPower(0.0);
-////                leftIntakeMotor.setPower(0.0);
-//            }
-//
-//            if (gamepad1.left_trigger > 0.1) {
-//                robot.theOuttake.outtake();
-////                leftOuttakeMotor.setPower(1.0);
-////                rightOuttakeMotor.setPower(1.0);
-//            } else {
-//                robot.theOuttake.stopOuttake();
-////                rightOuttakeMotor.setPower(0.0);
-////                leftOuttakeMotor.setPower(0.0);
-//            }
-//            if (gamepad1.left_bumper) {
-//                robot.theOuttake.transfer();
-////                leftIntakeMotor.setPower(0.0);
-////                rightIntakeMotor.setPower(0.0);
-////                leftOuttakeMotor.setPower(1.0);
-////                rightOuttakeMotor.setPower(1.0);
-////                transferTime.reset();
-////
-////                while (transferTime.milliseconds() < 200) {
-////                    leftTransferServo.setPosition(0.10);
-////                    rightTransferServo.setPosition(0.10);
-////                }
-////                while (transferTime.milliseconds() < 390) {
-////                    leftTransferServo.setPosition(0.52);
-////                    rightTransferServo.setPosition(0.52);
-////                }
-////                while (transferTime.milliseconds() < 600) {
-////                    rightIntakeMotor.setPower(0.0);
-////                    leftIntakeMotor.setPower(0.0);
-////                }
-////                while (transferTime.milliseconds() < 1000) {
-////                    rightIntakeMotor.setPower(1.0);
-////                    leftIntakeMotor.setPower(1.0);
-////                }
-//            }
-//            leftTurretServo.setPosition(0.5);
-//            rightTurretServo.setPosition(0.5);
+            if (gamepad1.right_trigger >= 0.1) {
+                robot.theIntake.intakeForward();
+            } else if (gamepad1.right_bumper) {
+                robot.theIntake.intakeReverse();
+            } else {
+                robot.theIntake.stopIntake();
+            }
+
+            if (gamepad1.left_trigger > 0.1) {
+                robot.theOuttake.outtake(outtakePower);
+            } else {
+                robot.theOuttake.stopOuttake();
+            }
+            if (gamepad1.left_bumper) {
+                robot.theOuttake.transfer();
+            }
             telemetry.addData("Status", "Run Time:" + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
