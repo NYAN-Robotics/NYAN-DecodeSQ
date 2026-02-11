@@ -34,7 +34,7 @@ public class TuningAuto extends LinearOpMode {
                         new MovementCommand(
                                 new Pose(0, 0, Math.PI / 2),
                                 new Pose(0, 40, Math.PI / 2),
-                                new MovementConstants(0.5)
+                                new MovementConstants(10)
                         ),
                         new MovementCommand(
                                 new Pose(0, 40, Math.PI / 2),

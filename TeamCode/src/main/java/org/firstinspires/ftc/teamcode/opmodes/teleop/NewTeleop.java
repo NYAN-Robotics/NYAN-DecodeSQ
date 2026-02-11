@@ -172,8 +172,8 @@ public class NewTeleop extends LinearOpMode {
                 outtakePower = 0.8;
             }
             if (highTurret) {
-                rightPivotServo.setPosition(0.9);
-                leftPivotServo.setPosition(0.9);
+                rightPivotServo.setPosition(0.8);
+                leftPivotServo.setPosition(0.8);
             } else {
                 rightPivotServo.setPosition(0.6);
                 leftPivotServo.setPosition(0.6);
@@ -188,6 +188,7 @@ public class NewTeleop extends LinearOpMode {
 
             if (gamepad1.left_trigger > 0.1) {
                 robot.theOuttake.outtake(outtakePower);
+//                robot.theIntake.intakeForward(); // andrew request
             } else {
                 robot.theOuttake.stopOuttake();
             }
