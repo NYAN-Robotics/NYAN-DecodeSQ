@@ -46,7 +46,7 @@ public class Drivetrain implements Subsystem {
 
     private boolean enableCentripetalCorrection = false;
 
-    public GeneralPIDController xController = new GeneralPIDController(0.44, 0, 0.055, 0);
+    public GeneralPIDController xController = new GeneralPIDController(0.3, 0, 0.1, 0);
     public GeneralPIDController yController = new GeneralPIDController(0.4, 0, 0.05, 0);
     public GeneralPIDController headingController = new GeneralPIDController(0, 0, 0, 0);
 
@@ -188,15 +188,15 @@ public class Drivetrain implements Subsystem {
             fieldCentricDriveFromGamepad(centripetalCorrection.theY, centripetalCorrection.theX, 0);
         }
 
-        headingPID.updateCoefficients(Drivetrain.kP, Drivetrain.kI, Drivetrain.kD, 0);
+//        headingPID.updateCoefficients(Drivetrain.kP, Drivetrain.kI, Drivetrain.kD, 0);
 
         rightBackMotor.setPower(rightBackPower);
         rightFrontMotor.setPower(rightFrontPower);
-        leftBackMotor.setPower(leftBackPower);
+        leftBackMotor.setPower(leftBackPower * 1.15);
         leftFrontMotor.setPower(leftFrontPower);
 
         lastRightBackPower = rightBackPower;
-        lastLeftBackPower= leftBackPower;
+        lastLeftBackPower = leftBackPower;
         lastLeftFrontPower = leftFrontPower;
         lastRightFrontPower = rightFrontPower;
 
@@ -208,7 +208,7 @@ public class Drivetrain implements Subsystem {
 
     public void robotCentricDriveFromGamepad(double leftJoystickY, double leftJoystickX, double rightJoystickX) {
 
-        //leftJoystickX *= LATERAL_MULTIPLIER;
+        leftJoystickX *= LATERAL_MULTIPLIER;
 
         double multiple = RobotEx.getInstance().getPowerMultiple();
 

@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.utilities.robot.movement.MovementConstants
 /**
  * Example teleop code for a basic mecanum drive
  */
-@Autonomous(name = "Tuning Auto")
-public class TuningAuto extends LinearOpMode {
+@Autonomous(name = "Strafe Auto")
+public class StrafeAuto extends LinearOpMode {
 
     // Create new Instance of the robot
     RobotEx robot = RobotEx.getInstance();
@@ -31,21 +31,21 @@ public class TuningAuto extends LinearOpMode {
 
         SequentialCommandGroup commands = new SequentialCommandGroup(
                 //new ParallelCommandGroup(
-                        new MovementCommand(
-                                new Pose(0, 0, Math.PI / 2),
-                                new Pose(0, 40, Math.PI / 2),
-                                new MovementConstants(3)
-                        ),
-                        new MovementCommand(
-                                new Pose(0, 40, Math.PI / 2),
-                                new Pose(40, 40, Math.PI / 2),
-                                new MovementConstants(3)
-                        )//,
-//                        new MovementCommand(
-//                                new Pose(40, 40, Math.PI / 2),
-//                                new Pose(20, 40, 0),
-//                                new MovementConstants(10)
-//                        ),
+                new MovementCommand(
+                        new Pose(0, 0, Math.PI / 2),
+                        new Pose(40, 0, Math.PI / 2),
+                        new MovementConstants(10)
+                )//,
+//                new MovementCommand(
+//                        new Pose(0, 40, Math.PI / 2),
+//                        new Pose(40, 40, Math.PI / 2),
+//                        new MovementConstants(3)
+//                ),
+//                new MovementCommand(
+//                        new Pose(40, 40, Math.PI / 2),
+//                        new Pose(20, 40, 0),
+//                        new MovementConstants(10)
+//                ),
 //                        new SequentialCommandGroup(
 //                                new YieldCommand(500),
 //                                new OneTimeCommand(() -> robot.theOuttake.outtake()),
