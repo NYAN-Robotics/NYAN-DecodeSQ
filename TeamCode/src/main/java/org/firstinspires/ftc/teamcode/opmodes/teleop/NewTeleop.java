@@ -167,9 +167,9 @@ public class NewTeleop extends LinearOpMode {
                 }
             }
             if (highTurret) {
-                outtakePower = 0.8;
+                outtakePower = 1.0;
             } else {
-                outtakePower = 0.8;
+                outtakePower = 1.0;
             }
             if (highTurret) {
                 rightPivotServo.setPosition(0.8);

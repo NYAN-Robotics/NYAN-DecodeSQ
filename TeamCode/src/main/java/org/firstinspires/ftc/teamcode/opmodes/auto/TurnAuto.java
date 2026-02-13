@@ -33,7 +33,7 @@ public class TurnAuto extends LinearOpMode {
                 //new ParallelCommandGroup(
                 new MovementCommand(
                         new Pose(0, 0, Math.PI / 2),
-                        new Pose(0, 0, 0),
+                        new Pose(20, 0, 0),
                         new MovementConstants(10)
                 )//,
 //                new MovementCommand(

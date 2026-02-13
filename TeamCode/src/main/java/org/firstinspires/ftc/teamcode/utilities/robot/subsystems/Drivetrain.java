@@ -48,7 +48,7 @@ public class Drivetrain implements Subsystem {
 
     public GeneralPIDController xController = new GeneralPIDController(0.3, 0, 0.1, 0);
     public GeneralPIDController yController = new GeneralPIDController(0.4, 0, 0.05, 0);
-    public GeneralPIDController headingController = new GeneralPIDController(0, 0, 0, 0);
+    public GeneralPIDController headingController = new GeneralPIDController(10, 0, 0, 0);
 
     public GeneralPIDController headingPID = new GeneralPIDController();
     public GeneralPIDController profiledTurningPID = new GeneralPIDController(0, 0, 0, 0);
@@ -192,7 +192,7 @@ public class Drivetrain implements Subsystem {
 
         rightBackMotor.setPower(rightBackPower);
         rightFrontMotor.setPower(rightFrontPower);
-        leftBackMotor.setPower(leftBackPower * 1.15);
+        leftBackMotor.setPower(leftBackPower);
         leftFrontMotor.setPower(leftFrontPower);
 
         lastRightBackPower = rightBackPower;
