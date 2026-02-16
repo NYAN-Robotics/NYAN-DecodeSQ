@@ -27,14 +27,14 @@ public class TurnAuto extends LinearOpMode {
 
         // Initialize the robot
         robot.init(this, telemetry);
-        robot.theLocalizer.setPose(new Pose(0, 0, Math.PI / 2));
+        robot.theLocalizer.setPose(new Pose(0, 0, 0));
 
         SequentialCommandGroup commands = new SequentialCommandGroup(
                 //new ParallelCommandGroup(
                 new MovementCommand(
-                        new Pose(0, 0, Math.PI / 2),
-                        new Pose(20, 0, 0),
-                        new MovementConstants(10)
+                        new Pose(0, 0, 0),
+                        new Pose(0, 20, -Math.PI / 2),
+                        new MovementConstants(30)
                 )//,
 //                new MovementCommand(
 //                        new Pose(0, 40, Math.PI / 2),

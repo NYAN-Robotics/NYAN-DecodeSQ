@@ -48,7 +48,7 @@ public class Drivetrain implements Subsystem {
 
     public GeneralPIDController xController = new GeneralPIDController(0.3, 0, 0.1, 0);
     public GeneralPIDController yController = new GeneralPIDController(0.4, 0, 0.05, 0);
-    public GeneralPIDController headingController = new GeneralPIDController(10, 0, 0, 0);
+    public GeneralPIDController headingController = new GeneralPIDController(0.7, 0, 0, 0);
 
     public GeneralPIDController headingPID = new GeneralPIDController();
     public GeneralPIDController profiledTurningPID = new GeneralPIDController(0, 0, 0, 0);
@@ -136,10 +136,10 @@ public class Drivetrain implements Subsystem {
         rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
 
-        rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        leftFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        rightBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         drivetrainMotorGroup = new MotorGroup<>(
                 rightFrontMotor,
