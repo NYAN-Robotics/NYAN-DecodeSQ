@@ -63,10 +63,10 @@ public class FieldCentricDrive extends LinearOpMode {
         rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
 
-        leftFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        leftBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        rightFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        rightBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        leftFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+        leftBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+        rightFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+        rightBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
 
         leftTurretServo = hardwareMap.get(Servo.class, "leftTurretServo");
         rightTurretServo = hardwareMap.get(Servo.class, "rightTurretServo");
@@ -97,6 +97,7 @@ public class FieldCentricDrive extends LinearOpMode {
         boolean highTurret = false;
 
         Alliance currentAlliance = Alliance.BLUE;
+
 
         while (opModeInInit()) {
             telemetry.addData("Alliance", currentAlliance.name());
@@ -262,6 +263,9 @@ public class FieldCentricDrive extends LinearOpMode {
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.update();
+        }
+        while (!isStopRequested()) {
+            robot.update();
         }
     }
 }
