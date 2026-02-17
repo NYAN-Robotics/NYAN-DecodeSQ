@@ -26,6 +26,8 @@ import org.mercurialftc.mercurialftc.util.hardware.cachinghardwaredevice.Caching
 
 @Config
 public class Outtake implements Subsystem {
+    private Servo leftTurretServo = null;
+    private Servo rightTurretServo = null;
     private DcMotorEx rightIntakeMotor = null;
     private DcMotorEx leftIntakeMotor = null;
     private DcMotorEx rightOuttakeMotor = null;
@@ -42,18 +44,23 @@ public class Outtake implements Subsystem {
         leftOuttakeMotor.setPower(0.0);
         rightOuttakeMotor.setPower(0.0);
     }
-    public void transfer() {
+    public void transfer(double power) {
+        double ltpos = leftTurretServo.getPosition();
+        double rtpos = rightTurretServo.getPosition();
+
+        leftTurretServo.setPosition(ltpos + 0.025);
+        rightTurretServo.setPosition(rtpos + 0.025);
         leftIntakeMotor.setPower(0.0);
         rightIntakeMotor.setPower(0.0);
-        leftOuttakeMotor.setPower(1.0);
-        rightOuttakeMotor.setPower(1.0);
+        leftOuttakeMotor.setPower(power);
+        rightOuttakeMotor.setPower(power);
         transferTime.reset();
 
         while (transferTime.milliseconds() < 500) {
             leftIntakeMotor.setPower(0.0);
             rightIntakeMotor.setPower(0.0);
-            leftOuttakeMotor.setPower(1.0);
-            rightOuttakeMotor.setPower(1.0);
+            leftOuttakeMotor.setPower(power);
+            rightOuttakeMotor.setPower(power);
         }
 
         transferTime.reset();
@@ -321,6 +328,12 @@ public class Outtake implements Subsystem {
 
         rightOuttakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftOuttakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        leftTurretServo = hardwareMap.get(Servo.class, "leftTurretServo");
+        rightTurretServo = hardwareMap.get(Servo.class, "rightTurretServo");
+
+        leftTurretServo.setDirection(Servo.Direction.FORWARD);
+        rightTurretServo.setDirection(Servo.Direction.FORWARD);
 
 //        clawServo.setDirection(Servo.Direction.REVERSE);
 //        this.telemetry = telemetry;

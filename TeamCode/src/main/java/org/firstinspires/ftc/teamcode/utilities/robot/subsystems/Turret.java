@@ -46,12 +46,12 @@ public class Turret implements Subsystem {
         telemetry.addData("ltpos", ltpos);
         telemetry.addData("rtpos", rtpos);
         telemetry.update();
-        if (tx <= -5) {
-            leftTurretServo.setPosition(ltpos + 0.001);
-            rightTurretServo.setPosition(rtpos + 0.001);
-        } else if (tx >= 5) {
-            leftTurretServo.setPosition(ltpos - 0.001);
-            rightTurretServo.setPosition(rtpos - 0.001);
+        if (tx <= -3) {
+            leftTurretServo.setPosition(ltpos + 0.0005);
+            rightTurretServo.setPosition(rtpos + 0.0005);
+        } else if (tx >= 3) {
+            leftTurretServo.setPosition(ltpos - 0.0005);
+            rightTurretServo.setPosition(rtpos - 0.0005);
         }
     }
     @Override

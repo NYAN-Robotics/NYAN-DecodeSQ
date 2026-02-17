@@ -52,7 +52,7 @@ public class Drivetrain implements Subsystem {
 //
 //    public GeneralPIDController headingPID = new GeneralPIDController();
 //    public GeneralPIDController profiledTurningPID = new GeneralPIDController(0, 0, 0, 0);
-    public GeneralPIDController xController = new GeneralPIDController();
+    public GeneralPIDController xController = new GeneralPIDController(0.6, 0, 0.05, 0);
     public GeneralPIDController yController = new GeneralPIDController();
     public GeneralPIDController headingController = new GeneralPIDController();
 
@@ -86,7 +86,7 @@ public class Drivetrain implements Subsystem {
     private double wheelBase = 6.5;
     private double lateralMultiplier = -1.2;
 
-    public static double LATERAL_MULTIPLIER = 1.33;
+    public static double LATERAL_MULTIPLIER = 1.33; // 1.33
 
     public static double CENTRIPETAL_CONVERSION = 0.1;
 

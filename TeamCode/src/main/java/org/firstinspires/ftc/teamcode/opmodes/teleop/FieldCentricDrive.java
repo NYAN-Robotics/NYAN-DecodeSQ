@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.utilities.math.linearalgebra.Pose;
 import org.firstinspires.ftc.teamcode.utilities.robot.Alliance;
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
 import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Outtake;
@@ -34,21 +35,23 @@ public class FieldCentricDrive extends LinearOpMode {
 
         RobotEx robot = RobotEx.getInstance();
         robot.init(this, telemetry);
+        robot.theLocalizer.setPose(new Pose(0, 0, Math.PI / 2));
 
-        leftFrontMotor = hardwareMap.get(DcMotorEx.class, "leftFrontMotor");
-        leftBackMotor = hardwareMap.get(DcMotorEx.class, "leftBackMotor");
-        rightFrontMotor = hardwareMap.get(DcMotorEx.class, "rightFrontMotor");
-        rightBackMotor = hardwareMap.get(DcMotorEx.class, "rightBackMotor");
-
-        leftFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
-        leftBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
-        rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
-
-        leftFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
-        leftBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
-        rightFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
-        rightBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+//
+//        leftFrontMotor = hardwareMap.get(DcMotorEx.class, "leftFrontMotor");
+//        leftBackMotor = hardwareMap.get(DcMotorEx.class, "leftBackMotor");
+//        rightFrontMotor = hardwareMap.get(DcMotorEx.class, "rightFrontMotor");
+//        rightBackMotor = hardwareMap.get(DcMotorEx.class, "rightBackMotor");
+//
+//        leftFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
+//        leftBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
+//        rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
+//        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
+//
+//        leftFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+//        leftBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+//        rightFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+//        rightBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -69,6 +72,15 @@ public class FieldCentricDrive extends LinearOpMode {
             }
         }
 
+        waitForStart();
+
+        // Notify subsystems before loop
+        robot.postStart();
+
+        if (isStopRequested()) return;
+
+        robot.pause(0.5);
+
         while (opModeIsActive()) {
 
             double axial = gamepad1.left_stick_y; // y is inverted to reverse the robot
@@ -80,6 +92,7 @@ public class FieldCentricDrive extends LinearOpMode {
             telemetry.addData("Status", "Driving");
             telemetry.update();
         }
+
         while (!isStopRequested()) {
             robot.update();
         }

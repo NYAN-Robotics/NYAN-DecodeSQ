@@ -64,11 +64,6 @@ public class NewTeleop extends LinearOpMode {
         rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
 
-//        leftFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//        leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
-//        rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
-
         leftFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -174,11 +169,11 @@ public class NewTeleop extends LinearOpMode {
             if (highTurret) {
                 outtakePower = 1.0;
             } else {
-                outtakePower = 1.0;
+                outtakePower = 0.4;
             }
             if (highTurret) {
-                rightPivotServo.setPosition(0.8);
-                leftPivotServo.setPosition(0.8);
+                rightPivotServo.setPosition(1.0);
+                leftPivotServo.setPosition(1.0);
             } else {
                 rightPivotServo.setPosition(0.6);
                 leftPivotServo.setPosition(0.6);
@@ -198,7 +193,7 @@ public class NewTeleop extends LinearOpMode {
                 robot.theOuttake.stopOuttake();
             }
             if (gamepad1.left_bumper) {
-                robot.theOuttake.transfer();
+                robot.theOuttake.transfer(outtakePower);
             }
             telemetry.addData("Status", "Run Time:" + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
