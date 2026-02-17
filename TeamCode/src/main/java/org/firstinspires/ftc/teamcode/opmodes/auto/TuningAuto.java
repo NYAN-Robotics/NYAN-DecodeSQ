@@ -33,14 +33,14 @@ public class TuningAuto extends LinearOpMode {
                 //new ParallelCommandGroup(
                         new MovementCommand(
                                 new Pose(0, 0, Math.PI / 2),
-                                new Pose(0, 40, Math.PI / 2),
-                                new MovementConstants(3)
-                        ),
-                        new MovementCommand(
-                                new Pose(0, 40, Math.PI / 2),
-                                new Pose(40, 40, Math.PI / 2),
-                                new MovementConstants(3)
+                                new Pose(40, 0, Math.PI / 2),
+                                new MovementConstants(10)
                         )//,
+//                        new MovementCommand(
+//                                new Pose(0, 40, Math.PI / 2),
+//                                new Pose(40, 40, Math.PI / 2),
+//                                new MovementConstants(3)
+//                        ),
 //                        new MovementCommand(
 //                                new Pose(40, 40, Math.PI / 2),
 //                                new Pose(20, 40, 0),

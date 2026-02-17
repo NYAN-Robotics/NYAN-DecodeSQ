@@ -46,34 +46,18 @@ public class Drivetrain implements Subsystem {
 
     private boolean enableCentripetalCorrection = false;
 
-    public GeneralPIDController xController = new GeneralPIDController(0.3, 0, 0.1, 0);
-    public GeneralPIDController yController = new GeneralPIDController(0.4, 0, 0.05, 0);
-    public GeneralPIDController headingController = new GeneralPIDController(0.7, 0, 0, 0);
-
-    public GeneralPIDController headingPID = new GeneralPIDController();
-    public GeneralPIDController profiledTurningPID = new GeneralPIDController(0, 0, 0, 0);
-
-//    public GeneralPIDController xController = new GeneralPIDController(0.2, 0, 0.4, 0);
-//    public GeneralPIDController xController =  new GeneralPIDController(0, 0, 0, 0);
-//    public GeneralPIDController yController = new GeneralPIDController(0.2, 0, 0.4, 0);
-//    public GeneralPIDController yController = new GeneralPIDController(0.03, 0, 0, 0);
-//    public GeneralPIDController headingController = new GeneralPIDController();
+//    public GeneralPIDController xController = new GeneralPIDController(0.3, 0, 0.1, 0);
+//    public GeneralPIDController yController = new GeneralPIDController(0.4, 0, 0.05, 0);
+//    public GeneralPIDController headingController = new GeneralPIDController(0.32, 0, 0, 0);
 //
 //    public GeneralPIDController headingPID = new GeneralPIDController();
-//    public GeneralPIDController profiledTurningPID = new GeneralPIDController(1, 0.5, 0.5, 0);
-//
+//    public GeneralPIDController profiledTurningPID = new GeneralPIDController(0, 0, 0, 0);
+    public GeneralPIDController xController = new GeneralPIDController();
+    public GeneralPIDController yController = new GeneralPIDController();
+    public GeneralPIDController headingController = new GeneralPIDController();
 
-//    public GeneralPIDController xController = new GeneralPIDController(0.2, 0, 1, 0);
-//    public GeneralPIDController yController = new GeneralPIDController(0.2, 0, 1, 0);
-//    public GeneralPIDController headingController = new GeneralPIDController(1.5, 0, 0, 0);
-//
-//    public GeneralPIDController headingPID = new GeneralPIDController(0.3, 0, 5, 0);
-//    public GeneralPIDController profiledTurningPID = new GeneralPIDController(3.5, 0, 20, 0);
-//
-//    public GeneralPIDController translationalPID = new GeneralPIDController(1, 0, 0, 0);
-//
-//    public GeneralPIDController tiltPID = new GeneralPIDController(0.3, 0, 0, 0);
-//    public GeneralPIDController yawPID = new GeneralPIDController(0.3, 0, 0, 0);
+    public GeneralPIDController headingPID = new GeneralPIDController();
+    public GeneralPIDController profiledTurningPID = new GeneralPIDController();
 
     private Telemetry telemetry;
 
@@ -131,10 +115,15 @@ public class Drivetrain implements Subsystem {
         setRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        leftFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
+//        leftFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
+//        leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
+//        rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
+//        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
+
+        leftFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
         leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
         rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
+        rightBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
 
         rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         leftFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);

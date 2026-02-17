@@ -64,6 +64,11 @@ public class NewTeleop extends LinearOpMode {
         rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
         rightBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
 
+//        leftFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
+//        leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
+//        rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
+//        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
+
         leftFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftBackMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         rightFrontMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
