@@ -44,10 +44,10 @@ public class DriveConstants {
     public static double MAX_CORRECTION_TIME = 10;
 
     public static double V_MAX = 40; // If doing 1
-    public static double A_MAX = 30;
+    public static double A_MAX = 40;
 
-    public static double K_V = 0; //0.013
-    public static double K_A = 0; //0.0035
+    public static double K_V = 0.013; //0.013
+    public static double K_A = 0.0035; //0.0035
 
     public static Pose THRESHOLD = new Pose(1, 1, Math.toRadians(1));
     public static double THRESHOLD_TIME = 0.5;

@@ -81,19 +81,32 @@ public class FieldCentricDrive extends LinearOpMode {
 
         robot.pause(0.5);
 
-        while (opModeIsActive()) {
-
-            double axial = gamepad1.left_stick_y; // y is inverted to reverse the robot
-            double lateral = -gamepad1.left_stick_x;
-            double yaw = gamepad1.right_stick_x;
-
-            robot.theDrivetrain.fieldCentricDriveFromGamepad(axial, lateral, yaw);
-
-            telemetry.addData("Status", "Driving");
-            telemetry.update();
-        }
+//        while (opModeIsActive()) {
+//
+//            double axial = gamepad1.left_stick_y; // y is inverted to reverse the robot
+//            double lateral = -gamepad1.left_stick_x;
+//            double yaw = gamepad1.right_stick_x;
+//
+//            robot.theDrivetrain.fieldCentricDriveFromGamepad(axial, lateral, yaw);
+//
+//            telemetry.addData("Status", "Driving");
+//            telemetry.update();
+//        }
 
         while (!isStopRequested()) {
+            double axial;// = -gamepad1.left_stick_y; // y is inverted to reverse the robot
+            double lateral;
+            if (currentAlliance == Alliance.BLUE) {
+                lateral = gamepad1.left_stick_x;
+                axial = -gamepad1.left_stick_y;
+            } else {
+                lateral = -gamepad1.left_stick_x;
+                axial = gamepad1.left_stick_y;
+            }
+            double yaw = gamepad1.right_stick_x;
+            robot.theDrivetrain.fieldCentricDriveFromGamepad(axial, lateral, yaw);
+            telemetry.addData("Status", "Driving");
+            telemetry.update();
             robot.update();
         }
     }

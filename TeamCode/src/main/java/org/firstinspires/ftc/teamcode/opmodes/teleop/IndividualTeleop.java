@@ -158,7 +158,7 @@ public class IndividualTeleop extends LinearOpMode {
 //            leftBackMotor.setPower(leftBackPower);
 //            leftFrontMotor.setPower(leftFrontPower);
 
-            robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
+//            robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
 
 //            LLResult result = limelight.getLatestResult();
 //            if (result != null && result.isValid()) {
