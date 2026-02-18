@@ -52,7 +52,7 @@ public class Drivetrain implements Subsystem {
 //
 //    public GeneralPIDController headingPID = new GeneralPIDController();
 //    public GeneralPIDController profiledTurningPID = new GeneralPIDController(0, 0, 0, 0);
-    public GeneralPIDController xController = new GeneralPIDController();
+    public GeneralPIDController xController = new GeneralPIDController(0, 0, 0, 0); //1.0
     public GeneralPIDController yController = new GeneralPIDController();
     public GeneralPIDController headingController = new GeneralPIDController();
 

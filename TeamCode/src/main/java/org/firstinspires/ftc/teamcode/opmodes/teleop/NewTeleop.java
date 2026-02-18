@@ -95,7 +95,8 @@ public class NewTeleop extends LinearOpMode {
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        boolean highTurret = false;
+        int turretPos = 1;
+        //1 very close, 2 mid range, 3 far
 
         Alliance currentAlliance = Alliance.BLUE;
 
@@ -158,25 +159,30 @@ public class NewTeleop extends LinearOpMode {
             leftTransferServo.setPosition(0.55);
             rightTransferServo.setPosition(0.55);
 
+
+
             if (gamepad1.dpad_up && turretModeTime.milliseconds() > 500) {
                 turretModeTime.reset();
-                if (!highTurret) {
-                    highTurret = true;
+                if (turretPos == 1) {
+                    turretPos = 2;
+                } else if (turretPos == 2) {
+                    turretPos = 3;
                 } else {
-                    highTurret = false;
+                    turretPos = 1;
                 }
             }
-            if (highTurret) {
-                outtakePower = 1.0;
-            } else {
+            if (turretPos == 1) {
+                rightPivotServo.setPosition(0.4);
+                leftPivotServo.setPosition(0.4);
                 outtakePower = 0.4;
-            }
-            if (highTurret) {
+            } else if (turretPos == 2) {
+                rightPivotServo.setPosition(0.7);
+                leftPivotServo.setPosition(0.7);
+                outtakePower = 0.5;
+            } else {
                 rightPivotServo.setPosition(1.0);
                 leftPivotServo.setPosition(1.0);
-            } else {
-                rightPivotServo.setPosition(0.6);
-                leftPivotServo.setPosition(0.6);
+                outtakePower = 0.85;
             }
             if (gamepad1.right_trigger >= 0.1) {
                 robot.theIntake.intakeForward();
@@ -193,7 +199,7 @@ public class NewTeleop extends LinearOpMode {
                 robot.theOuttake.stopOuttake();
             }
             if (gamepad1.left_bumper) {
-                robot.theOuttake.transfer(outtakePower);
+                robot.theOuttake.transfer(outtakePower, currentAlliance);
             }
             telemetry.addData("Status", "Run Time:" + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);

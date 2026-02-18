@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.utilities.controltheory.MotionProfiledMotion;
 import org.firstinspires.ftc.teamcode.utilities.controltheory.feedback.GeneralPIDController;
 import org.firstinspires.ftc.teamcode.utilities.controltheory.motionprofiler.MotionProfile;
+import org.firstinspires.ftc.teamcode.utilities.robot.Alliance;
 import org.firstinspires.ftc.teamcode.utilities.robot.Globals;
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
 import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.OneTimeCommand;
@@ -44,12 +45,16 @@ public class Outtake implements Subsystem {
         leftOuttakeMotor.setPower(0.0);
         rightOuttakeMotor.setPower(0.0);
     }
-    public void transfer(double power) {
+    public void transfer(double power, Alliance alliance) {
         double ltpos = leftTurretServo.getPosition();
         double rtpos = rightTurretServo.getPosition();
-
-        leftTurretServo.setPosition(ltpos + 0.025);
-        rightTurretServo.setPosition(rtpos + 0.025);
+        if (alliance == Alliance.BLUE) {
+            leftTurretServo.setPosition(ltpos + 0.025);
+            rightTurretServo.setPosition(rtpos + 0.025);
+        } else {
+            leftTurretServo.setPosition(ltpos - 0.025);
+            rightTurretServo.setPosition(rtpos - 0.025);
+        }
         leftIntakeMotor.setPower(0.0);
         rightIntakeMotor.setPower(0.0);
         leftOuttakeMotor.setPower(power);
