@@ -183,8 +183,8 @@ public class NewTeleop extends LinearOpMode {
                 leftPivotServo.setPosition(0.7);
                 outtakePower = 0.5 * robot.getPowerMultiple();
             } else {
-                rightPivotServo.setPosition(1.0);
-                leftPivotServo.setPosition(1.0);
+                rightPivotServo.setPosition(0.9);
+                leftPivotServo.setPosition(0.9);
                 outtakePower = 0.85 * robot.getPowerMultiple();
             }
             if (gamepad1.right_trigger >= 0.1) {
