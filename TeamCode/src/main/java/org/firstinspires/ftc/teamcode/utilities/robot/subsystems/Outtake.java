@@ -45,16 +45,15 @@ public class Outtake implements Subsystem {
         leftOuttakeMotor.setPower(0.0);
         rightOuttakeMotor.setPower(0.0);
     }
+    public void reverseOuttake() {
+        leftOuttakeMotor.setPower(-0.5);
+        rightOuttakeMotor.setPower(-0.5);
+    }
     public void transfer(double power, Alliance alliance) {
         double ltpos = leftTurretServo.getPosition();
         double rtpos = rightTurretServo.getPosition();
-        if (alliance == Alliance.BLUE) {
-            leftTurretServo.setPosition(ltpos + 0.025);
-            rightTurretServo.setPosition(rtpos + 0.025);
-        } else {
-            leftTurretServo.setPosition(ltpos - 0.025);
-            rightTurretServo.setPosition(rtpos - 0.025);
-        }
+        leftTurretServo.setPosition(ltpos + 0.025);
+        rightTurretServo.setPosition(rtpos + 0.025);
         leftIntakeMotor.setPower(0.0);
         rightIntakeMotor.setPower(0.0);
         leftOuttakeMotor.setPower(power);

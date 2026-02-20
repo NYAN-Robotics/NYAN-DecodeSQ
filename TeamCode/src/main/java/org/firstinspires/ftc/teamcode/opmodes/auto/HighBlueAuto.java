@@ -1,28 +1,26 @@
-package org.firstinspires.ftc.teamcode.opmodes.teleop;
+package org.firstinspires.ftc.teamcode.opmodes.auto;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.utilities.robot.Alliance;
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
-import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Outtake;
 
 import java.util.List;
 
 // I hope this works
-@TeleOp(name="New Teleop")
-public class NewTeleop extends LinearOpMode {
+@Autonomous(name="High Blue Auto")
+public class HighBlueAuto extends LinearOpMode {
     private final ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime transferTime = new ElapsedTime();
     private ElapsedTime turretModeTime = new ElapsedTime();
@@ -95,8 +93,7 @@ public class NewTeleop extends LinearOpMode {
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        int turretPos = 1;
-        //1 very close, 2 mid range, 3 far
+        boolean highTurret = false;
 
         Alliance currentAlliance = Alliance.BLUE;
 
@@ -111,12 +108,11 @@ public class NewTeleop extends LinearOpMode {
             if (gamepad1.square) {
                 currentAlliance = Alliance.RED;
             }
-
-            rightPivotServo.setPosition(0.6);
-            leftPivotServo.setPosition(0.6);
-
             leftTurretServo.setPosition(0.7);
             rightTurretServo.setPosition(0.7);
+
+            rightPivotServo.setPosition(1.0);
+            leftPivotServo.setPosition(1.0);
         }
 
         runtime.reset();
@@ -126,88 +122,55 @@ public class NewTeleop extends LinearOpMode {
             int id = 0;
             double tx = 0;
             double ty = 0;
-            double max;
-            double outtakePower;
-
-            double axial = gamepad1.left_stick_y; // y is inverted to reverse the robot
-            double yaw = -gamepad1.left_stick_x;
-            double lateral = gamepad1.right_stick_x;
-
-            double leftFrontPower = axial + yaw + lateral;
-            double leftBackPower = axial - yaw + lateral;
-            double rightFrontPower = axial - yaw - lateral;
-            double rightBackPower = axial + yaw - lateral;
-
-            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-            max = Math.max(max, Math.abs(leftBackPower));
-            max = Math.max(max, Math.abs(rightBackPower));
-
-            if (max > 1.0) {
-                leftFrontPower /= max;
-                leftBackPower /= max;
-                rightFrontPower /= max;
-                rightBackPower /= max;
-            }
-
-            rightBackMotor.setPower(rightBackPower);
-            rightFrontMotor.setPower(rightFrontPower);
-            leftBackMotor.setPower(leftBackPower);
-            leftFrontMotor.setPower(leftFrontPower);
 
             robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
 
-            leftTransferServo.setPosition(0.55);
-            rightTransferServo.setPosition(0.55);
+            rightPivotServo.setPosition(1.0);
+            leftPivotServo.setPosition(1.0);
 
+            if (isStopRequested()) return;
 
-
-            if (gamepad1.dpad_up && turretModeTime.milliseconds() > 500) {
-                turretModeTime.reset();
-                if (turretPos == 1) {
-                    turretPos = 2;
-                } else if (turretPos == 2) {
-                    turretPos = 3;
-                } else {
-                    turretPos = 1;
+            if (runtime.milliseconds() < 500) {
+                    leftFrontMotor.setPower(0.5);
+                    leftBackMotor.setPower(0.5);
+                    rightFrontMotor.setPower(0.5);
+                    rightBackMotor.setPower(0.5);
+            }
+            else if (runtime.milliseconds() < 2000) {
+                leftFrontMotor.setPower(0);
+                leftBackMotor.setPower(0);
+                rightFrontMotor.setPower(0);
+                rightBackMotor.setPower(0);
+                robot.theOuttake.outtake(0.85 * robot.getPowerMultiple());
+            } else if (runtime.milliseconds() < 12000) {
+                for (int i = 0; i < 4; i++) {
+                    robot.theOuttake.transfer(0.85 * robot.getPowerMultiple(), currentAlliance);
+                    transferTime.reset();
+                    while (transferTime.milliseconds() < 250) {
+                        robot.theIntake.intakeReverse();
+                        robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
+                    }
+                    while (transferTime.milliseconds() < 500) {
+                        robot.theIntake.intakeForward();
+                        robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
+                    }
+                    robot.theIntake.stopIntake();
                 }
-            }
-            if (gamepad1.dpad_down) {
-                robot.theOuttake.reverseOuttake();
-            }
-            if (turretPos == 1) {
-                rightPivotServo.setPosition(0.3);
-                leftPivotServo.setPosition(0.3);
-                outtakePower = 0.45 * robot.getPowerMultiple();
-            } else if (turretPos == 2) {
-                rightPivotServo.setPosition(0.7);
-                leftPivotServo.setPosition(0.7);
-                outtakePower = 0.5 * robot.getPowerMultiple();
-            } else {
-                rightPivotServo.setPosition(1.0);
-                leftPivotServo.setPosition(1.0);
-                outtakePower = 0.85 * robot.getPowerMultiple();
-            }
-            if (gamepad1.right_trigger >= 0.1) {
-                robot.theIntake.intakeForward();
-            } else if (gamepad1.right_bumper) {
-                robot.theIntake.intakeReverse();
-            } else {
-                robot.theIntake.stopIntake();
-            }
-
-            if (gamepad1.left_trigger > 0.1) {
-                robot.theOuttake.outtake(outtakePower);
-//                robot.theIntake.intakeForward(); // andrew request
-            } else {
+            } else if (runtime.milliseconds() < 13000) {
                 robot.theOuttake.stopOuttake();
+                robot.theIntake.stopIntake();
+                leftFrontMotor.setPower(0.5);
+                leftBackMotor.setPower(-0.5);
+                rightFrontMotor.setPower(-0.5);
+                rightBackMotor.setPower(0.5);
+            } else if (runtime.milliseconds() < 29000){
+                leftFrontMotor.setPower(0);
+                leftBackMotor.setPower(0);
+                rightFrontMotor.setPower(0);
+                rightBackMotor.setPower(0);
+            } else {
+                return;
             }
-            if (gamepad1.left_bumper) {
-                robot.theOuttake.transfer(outtakePower, currentAlliance);
-            }
-            telemetry.addData("Status", "Run Time:" + runtime.toString());
-            telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
-            telemetry.addData("Back left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
-            telemetry.update();
         }
     }
 }

@@ -218,7 +218,7 @@ public class RobotEx {
     }
 
     public double getPowerMultiple() {
-        return 12 / this.voltageCompensator;
+        return 11 / this.getVoltage();
     }
 
     public void destroy() {
