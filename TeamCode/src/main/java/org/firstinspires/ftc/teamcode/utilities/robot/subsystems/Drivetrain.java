@@ -44,7 +44,7 @@ public class Drivetrain implements Subsystem {
     private boolean enableAntiTip = false;
     private boolean enableHeadingRetention = false;
 
-    private boolean enableCentripetalCorrection = false;
+    private boolean enableCentripetalCorrection = false; // TODO: look at this
 
 //    public GeneralPIDController xController = new GeneralPIDController(0.3, 0, 0.1, 0);
 //    public GeneralPIDController yController = new GeneralPIDController(0.4, 0, 0.05, 0);
@@ -52,7 +52,7 @@ public class Drivetrain implements Subsystem {
 //
 //    public GeneralPIDController headingPID = new GeneralPIDController();
 //    public GeneralPIDController profiledTurningPID = new GeneralPIDController(0, 0, 0, 0);
-    public GeneralPIDController xController = new GeneralPIDController(0, 0, 0, 0); //1.0
+    public GeneralPIDController xController = new GeneralPIDController(); //1.0
     public GeneralPIDController yController = new GeneralPIDController();
     public GeneralPIDController headingController = new GeneralPIDController();
 
@@ -86,9 +86,9 @@ public class Drivetrain implements Subsystem {
     private double wheelBase = 6.5;
     private double lateralMultiplier = -1.2;
 
-    public static double LATERAL_MULTIPLIER = 1.33; // 1.33
+    public static double LATERAL_MULTIPLIER = 1.33; // TODO: look at this too
 
-    public static double CENTRIPETAL_CONVERSION = 0.1;
+    public static double CENTRIPETAL_CONVERSION = 0.1; // TODO: look at this if enabling centripetal
 
     public static double MASS = 26;
 
@@ -114,11 +114,6 @@ public class Drivetrain implements Subsystem {
 
         setRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-//        leftFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//        leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
-//        rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
-//        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
 
         leftFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
         leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);

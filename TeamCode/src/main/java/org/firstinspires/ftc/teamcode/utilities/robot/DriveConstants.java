@@ -53,7 +53,7 @@ public class DriveConstants {
     public static double THRESHOLD_TIME = 0.5;
 
     public static double MAX_ANGULAR_VELOCITY = Math.toRadians(180);
-    public static double trackWidth = 14;
+    public static double trackWidth = 8.5;
 
     public static ParkPositions parkPosition = ParkPositions.RIGHT;
 
