@@ -47,12 +47,12 @@ public class HighBlueTest extends LinearOpMode {
         rightPivotServo.setDirection(Servo.Direction.FORWARD);
         leftPivotServo.setDirection(Servo.Direction.REVERSE);
 
-        rightPivotServo.setPosition(0.9);
-        leftPivotServo.setPosition(0.9);
+        rightPivotServo.setPosition(0.8);
+        leftPivotServo.setPosition(0.8);
 
         leftTurretServo.setPosition(0.77);
         rightTurretServo.setPosition(0.77);
-        double outtakePower = 0.85 * robot.getPowerMultiple();
+        double outtakePower = 0.9 * robot.getPowerMultiple();
 
         Alliance currentAlliance = Alliance.BLUE;
 

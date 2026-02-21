@@ -181,11 +181,11 @@ public class NewTeleop extends LinearOpMode {
             } else if (turretPos == 2) {
                 rightPivotServo.setPosition(0.7);
                 leftPivotServo.setPosition(0.7);
-                outtakePower = 0.5 * robot.getPowerMultiple();
+                outtakePower = 0.55 * robot.getPowerMultiple();
             } else {
-                rightPivotServo.setPosition(0.9);
-                leftPivotServo.setPosition(0.9);
-                outtakePower = 0.85 * robot.getPowerMultiple();
+                rightPivotServo.setPosition(0.8);
+                leftPivotServo.setPosition(0.8);
+                outtakePower = 0.95 * robot.getPowerMultiple();
             }
             if (gamepad1.right_trigger >= 0.1) {
                 robot.theIntake.intakeForward();
@@ -203,6 +203,10 @@ public class NewTeleop extends LinearOpMode {
             }
             if (gamepad1.left_bumper) {
                 robot.theOuttake.transfer(outtakePower, currentAlliance);
+            }
+            if (gamepad1.circle) {
+                leftTurretServo.setPosition(0.7);
+                rightTurretServo.setPosition(0.7);
             }
             telemetry.addData("Status", "Run Time:" + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
