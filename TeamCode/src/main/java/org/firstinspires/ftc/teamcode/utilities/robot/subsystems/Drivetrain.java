@@ -43,6 +43,7 @@ public class Drivetrain implements Subsystem {
 
     private boolean enableAntiTip = false;
     private boolean enableHeadingRetention = false;
+    private boolean stop = false;
 
     private boolean enableCentripetalCorrection = false; // TODO: look at this
 
@@ -174,10 +175,17 @@ public class Drivetrain implements Subsystem {
 
 //        headingPID.updateCoefficients(Drivetrain.kP, Drivetrain.kI, Drivetrain.kD, 0);
 
-        rightBackMotor.setPower(rightBackPower);
-        rightFrontMotor.setPower(rightFrontPower);
-        leftBackMotor.setPower(leftBackPower);
-        leftFrontMotor.setPower(leftFrontPower);
+        if (stop) {
+            rightBackMotor.setPower(0);
+            leftBackMotor.setPower(0);
+            rightFrontMotor.setPower(0);
+            leftFrontMotor.setPower(0);
+        } else {
+            rightBackMotor.setPower(rightBackPower);
+            rightFrontMotor.setPower(rightFrontPower);
+            leftBackMotor.setPower(leftBackPower);
+            leftFrontMotor.setPower(leftFrontPower);
+        }
 
         lastRightBackPower = rightBackPower;
         lastLeftBackPower = leftBackPower;
@@ -190,6 +198,13 @@ public class Drivetrain implements Subsystem {
         rightFrontPower = 0;
     }
 
+    public void stopRobot() {
+        stop = true;
+    }
+    public void unStopRobot() {
+        stop = false;
+    }
+
     public void robotCentricDriveFromGamepad(double leftJoystickY, double leftJoystickX, double rightJoystickX) {
 
         leftJoystickX *= LATERAL_MULTIPLIER;
@@ -200,11 +215,18 @@ public class Drivetrain implements Subsystem {
         leftJoystickX = MathHelper.clamp(leftJoystickX * multiple, -1, 1);
         rightJoystickX = MathHelper.clamp(rightJoystickX * multiple, -1, 1);
 
-        double denominator = Math.max(Math.abs(leftJoystickY) + Math.abs(leftJoystickX) + Math.abs(rightJoystickX), 1);
-        this.leftFrontPower += (leftJoystickY + leftJoystickX + rightJoystickX) / denominator;
-        this.leftBackPower += (leftJoystickY - leftJoystickX + rightJoystickX) / denominator;
-        this.rightFrontPower += (leftJoystickY - leftJoystickX - rightJoystickX) / denominator;
-        this.rightBackPower += (leftJoystickY + leftJoystickX - rightJoystickX) / denominator;
+        if (stop) {
+            this.leftFrontPower = 0;
+            this.leftBackPower = 0;
+            this.rightFrontPower = 0;
+            this.rightBackPower = 0;
+        } else {
+            double denominator = Math.max(Math.abs(leftJoystickY) + Math.abs(leftJoystickX) + Math.abs(rightJoystickX), 1);
+            this.leftFrontPower += (leftJoystickY + leftJoystickX + rightJoystickX) / denominator;
+            this.leftBackPower += (leftJoystickY - leftJoystickX + rightJoystickX) / denominator;
+            this.rightFrontPower += (leftJoystickY - leftJoystickX - rightJoystickX) / denominator;
+            this.rightBackPower += (leftJoystickY + leftJoystickX - rightJoystickX) / denominator;
+        }
 
         this.lastX = leftJoystickX;
         this.lastY = leftJoystickY;

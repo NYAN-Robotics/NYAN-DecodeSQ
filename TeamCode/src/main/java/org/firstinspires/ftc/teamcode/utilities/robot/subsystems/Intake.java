@@ -41,8 +41,8 @@ public class Intake implements Subsystem {
     private DcMotorEx leftIntakeMotor = null;
 
     public void intakeForward() {
-        rightIntakeMotor.setPower(1.0);
-        leftIntakeMotor.setPower(1.0);
+        rightIntakeMotor.setPower(0.75);
+        leftIntakeMotor.setPower(0.75);
     }
 
     public void intakeReverse() {

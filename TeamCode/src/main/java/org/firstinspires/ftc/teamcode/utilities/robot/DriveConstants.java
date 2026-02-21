@@ -41,7 +41,7 @@ public class DriveConstants {
     public static double ANGULAR_VELOCITY_THRESHOLD = Math.toRadians(10);
     public static double ANGULAR_VELOCITY_THRESHOLD_MIN = Math.toRadians(1);
 
-    public static double MAX_CORRECTION_TIME = 10;
+    public static double MAX_CORRECTION_TIME = 0;
 
     public static double V_MAX = 40; // If doing 1
     public static double A_MAX = 40;
