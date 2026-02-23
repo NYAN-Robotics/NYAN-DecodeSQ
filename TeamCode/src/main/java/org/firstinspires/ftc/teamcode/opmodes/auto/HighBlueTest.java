@@ -47,12 +47,12 @@ public class HighBlueTest extends LinearOpMode {
         rightPivotServo.setDirection(Servo.Direction.FORWARD);
         leftPivotServo.setDirection(Servo.Direction.REVERSE);
 
-        rightPivotServo.setPosition(0.8);
-        leftPivotServo.setPosition(0.8);
+        rightPivotServo.setPosition(0.85);
+        leftPivotServo.setPosition(0.85);
 
-        leftTurretServo.setPosition(0.77);
-        rightTurretServo.setPosition(0.77);
-        double outtakePower = 0.9 * robot.getPowerMultiple();
+        leftTurretServo.setPosition(0.8);
+        rightTurretServo.setPosition(0.8);
+        double outtakePower = 0.9;
 
         Alliance currentAlliance = Alliance.BLUE;
 
@@ -71,8 +71,8 @@ public class HighBlueTest extends LinearOpMode {
                                 new OneTimeCommand(() -> robot.theOuttake.transfer(outtakePower, currentAlliance)),
                                 new YieldCommand(500),
                                 new ParallelCommandGroup(
-                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.77)),
-                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.77))
+                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.8)),
+                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.8))
                                 ),
                                 new OneTimeCommand(() -> robot.theOuttake.transfer(outtakePower, currentAlliance)),
                                 new YieldCommand(500),
@@ -85,8 +85,8 @@ public class HighBlueTest extends LinearOpMode {
                                         new YieldCommand(250)
                                 ),
                                 new ParallelCommandGroup(
-                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.77)),
-                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.77))
+                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.8)),
+                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.8))
                                 ),
                                 new OneTimeCommand(() -> robot.theOuttake.transfer(outtakePower, currentAlliance)),
                                 new ParallelCommandGroup(
@@ -99,8 +99,8 @@ public class HighBlueTest extends LinearOpMode {
                                 ),
                                 new YieldCommand(100),
                                 new ParallelCommandGroup(
-                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.77)),
-                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.77))
+                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.8)),
+                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.8))
                                 )
                         ),
                         new YieldCommand(1000)
@@ -108,19 +108,19 @@ public class HighBlueTest extends LinearOpMode {
                 new OneTimeCommand(() -> robot.theOuttake.stopOuttake()),
                 new MovementCommand(
                         new Pose(12, 0, 0),
-                        new Pose(37, 29, Math.PI / -2),
+                        new Pose(36, 25, Math.PI / -2),
                         new MovementConstants(0)
                 ),
                 new YieldCommand(500),
                 new MovementCommand(
-                        new Pose(37, 29, Math.PI / -2),
-                        new Pose(37, 60, Math.PI / -2),
+                        new Pose(36, 25, Math.PI / -2),
+                        new Pose(36, 65, Math.PI / -2),
                         new MovementConstants(20, 20, 0, 0.013, 0.0065)
                 ),
                 new YieldCommand(500),
                 new ParallelCommandGroup(
                         new MovementCommand(
-                                new Pose(37, 60, Math.PI / -2),
+                                new Pose(36, 65, Math.PI / -2),
                                 new Pose(12, 20, 0),
                                 new MovementConstants(0)
                         ),
@@ -129,16 +129,16 @@ public class HighBlueTest extends LinearOpMode {
                 new OneTimeCommand(() -> robot.theOuttake.outtake(outtakePower)),
                 new YieldCommand(1000),
                 new ParallelCommandGroup(
-                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.77)),
-                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.77))
+                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.8)),
+                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.8))
                 ),
                 new ParallelCommandGroup(
                         new SequentialCommandGroup(
                                 new OneTimeCommand(() -> robot.theOuttake.transfer(outtakePower, currentAlliance)),
                                 new YieldCommand(500),
                                 new ParallelCommandGroup(
-                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.77)),
-                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.77))
+                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.8)),
+                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.8))
                                 ),
                                 new OneTimeCommand(() -> robot.theOuttake.transfer(outtakePower, currentAlliance)),
                                 new YieldCommand(500),
@@ -151,8 +151,8 @@ public class HighBlueTest extends LinearOpMode {
                                         new YieldCommand(250)
                                 ),
                                 new ParallelCommandGroup(
-                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.77)),
-                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.77))
+                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.8)),
+                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.8))
                                 ),
                                 new OneTimeCommand(() -> robot.theOuttake.transfer(outtakePower, currentAlliance)),
                                 new ParallelCommandGroup(
@@ -165,8 +165,8 @@ public class HighBlueTest extends LinearOpMode {
                                 ),
                                 new YieldCommand(100),
                                 new ParallelCommandGroup(
-                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.77)),
-                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.77))
+                                        new OneTimeCommand(() -> leftTurretServo.setPosition(0.8)),
+                                        new OneTimeCommand(() -> rightTurretServo.setPosition(0.8))
                                 )
                         ),
                         new YieldCommand(1000)

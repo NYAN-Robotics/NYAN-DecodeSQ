@@ -52,7 +52,7 @@ public class HighRedTest extends LinearOpMode {
 
         leftTurretServo.setPosition(0.55);
         rightTurretServo.setPosition(0.55);
-        double outtakePower = 0.85 * robot.getPowerMultiple();
+        double outtakePower = 0.9;
 
         Alliance currentAlliance = Alliance.RED;
 
@@ -108,20 +108,20 @@ public class HighRedTest extends LinearOpMode {
                 new OneTimeCommand(() -> robot.theOuttake.stopOuttake()),
                 new MovementCommand(
                         new Pose(12, 0, 0),
-                        new Pose(31, -25, Math.PI / 2),
+                        new Pose(31.5, -23, Math.PI / 2),
                         new MovementConstants(0)
                 ),
                 new YieldCommand(500),
                 new MovementCommand(
-                        new Pose(31, -25, Math.PI / 2),
-                        new Pose(31, -60, Math.PI / 2),
+                        new Pose(31.5, -23, Math.PI / 2),
+                        new Pose(31.5, -60, Math.PI / 2),
                         new MovementConstants(20, 20, 0, 0.013, 0.0065)
                 ),
                 new YieldCommand(500),
                 new ParallelCommandGroup(
                         new MovementCommand(
-                                new Pose(31, -60, Math.PI / 2),
-                                new Pose(8, -15, 0),
+                                new Pose(31.5, -60, Math.PI / 2),
+                                new Pose(8, -5, 0),
                                 new MovementConstants(0)
                         ),
                         new OneTimeCommand(() -> robot.theIntake.stopIntake())
@@ -172,8 +172,8 @@ public class HighRedTest extends LinearOpMode {
                         new YieldCommand(1000)
                 ),
                 new MovementCommand(
-                        new Pose(8, -15, 0),
-                        new Pose(20, -20, 0),
+                        new Pose(8, -5, 0),
+                        new Pose(28, -5, 0),
                         new MovementConstants()
                 )
 

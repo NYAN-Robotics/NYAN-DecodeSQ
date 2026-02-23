@@ -52,8 +52,8 @@ public class Outtake implements Subsystem {
     public void transfer(double power, Alliance alliance) {
         double ltpos = leftTurretServo.getPosition();
         double rtpos = rightTurretServo.getPosition();
-        leftTurretServo.setPosition(ltpos + 0.025);
-        rightTurretServo.setPosition(rtpos + 0.025);
+//        leftTurretServo.setPosition(ltpos + 0.025);
+//        rightTurretServo.setPosition(rtpos + 0.025);
         leftIntakeMotor.setPower(0.0);
         rightIntakeMotor.setPower(0.0);
         leftOuttakeMotor.setPower(power);

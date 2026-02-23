@@ -177,15 +177,15 @@ public class NewTeleop extends LinearOpMode {
             if (turretPos == 1) {
                 rightPivotServo.setPosition(0.3);
                 leftPivotServo.setPosition(0.3);
-                outtakePower = 0.45 * robot.getPowerMultiple();
+                outtakePower = 0.4;// * robot.getPowerMultiple();
             } else if (turretPos == 2) {
                 rightPivotServo.setPosition(0.7);
                 leftPivotServo.setPosition(0.7);
-                outtakePower = 0.55 * robot.getPowerMultiple();
+                outtakePower = 0.5;
             } else {
                 rightPivotServo.setPosition(0.8);
                 leftPivotServo.setPosition(0.8);
-                outtakePower = 0.95 * robot.getPowerMultiple();
+                outtakePower = 1.0;
             }
             if (gamepad1.right_trigger >= 0.1) {
                 robot.theIntake.intakeForward();
